@@ -55,6 +55,6 @@ private:
         return point->getY() + height / 2;
     }
 
-    bool isXinRange(float x);
-    bool isYinRange(float y);
+    bool isXinRange(float x) const;
+    bool isYinRange(float y) const;
 };

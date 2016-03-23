@@ -4,6 +4,7 @@
 PHP_MINIT_FUNCTION(PQuadTrees)
 {
     init_point(INIT_FUNC_ARGS_PASSTHRU);
+    init_box(INIT_FUNC_ARGS_PASSTHRU);
 
     return SUCCESS;
 }

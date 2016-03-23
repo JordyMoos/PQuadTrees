@@ -13,17 +13,17 @@ private:
 public:
     QuadTreeBoundingBox(QuadTreePoint *point, float width, float height);
 
-    const QuadTreePoint& getCenterPoint() const
+    QuadTreePoint* getCenterPoint() const
     {
         return point;
     }
 
-    const getWidth() const
+    const float getWidth() const
     {
         return width;
     }
 
-    const getHeight() const
+    const float getHeight() const
     {
         return height;
     }

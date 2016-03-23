@@ -49,8 +49,6 @@ PHP_METHOD(Point, __construct)
         RETURN_NULL();
     }
 
-    php_printf("x: %f, y: %f", x, y);
-
     QuadTreePoint *point = new QuadTreePoint(
         static_cast<float>(x),
         static_cast<float>(y)

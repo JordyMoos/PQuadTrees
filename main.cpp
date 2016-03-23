@@ -1,8 +1,11 @@
 
 #include "main.h"
+#include "point.cpp"
 
 PHP_MINIT_FUNCTION(PQuadTrees)
 {
+    init_point(INIT_FUNC_ARGS_PASSTHRU);
+
     return SUCCESS;
 }
 

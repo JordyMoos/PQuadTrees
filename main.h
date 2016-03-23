@@ -14,3 +14,5 @@ extern "C" {
 
 extern zend_module_entry pquadtrees_module_entry;
 #define phpext_pquadtrees_ptr &puadtrees_module_entry;
+
+//void init_point(INIT_FUNC_ARGS);

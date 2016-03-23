@@ -1,6 +1,5 @@
 
 #include "main.h"
-#include "point.cpp"
 
 PHP_MINIT_FUNCTION(PQuadTrees)
 {

@@ -43,15 +43,20 @@ zend_class_entry *box_ce;
 
 PHP_METHOD(Box, __construct)
 {
-//    zval *point;
-//    double width = 1.0;
-//    double height = 1.0;
-//    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O|dd" ) == FAILURE)
-//    {
-//        RETURN_NULL();
-//    }
+    zval *point;
+    double width = 1.0;
+    double height = 1.0;
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O|dd", &point, point_ce, &width, &height) == FAILURE)
+    {
+        php_printf("Failed\n");
+        RETURN_NULL();
+    }
 
+    php_printf("Good\n");
+    php_printf("Width: %f\n", width);
+    php_printf("Height: %f\n", height);
 
+    PRINT_ZVAL(point);
 
     RETURN_NULL();
 }

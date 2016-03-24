@@ -13,3 +13,9 @@ echo 'Default parameters: ' . PHP_EOL;
 $point = new QuadTreePoint();
 echo $point->getX() . PHP_EOL;
 echo $point->getY() . PHP_EOL;
+
+echo PHP_EOL;
+
+$box = new QuadTreeBoundingBox($point, 10, 20);
+
+

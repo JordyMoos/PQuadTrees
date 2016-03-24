@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "debug.h"
+
 #define PHP_PQUADTREES_EXTNAME      "PQuadTrees"
 #define PHP_PQUADTREES_EXTVER       "0.1"
 

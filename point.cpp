@@ -39,6 +39,8 @@ zend_object_value point_create_handler(zend_class_entry *type TSRMLS_DC)
     return retval;
 }
 
+zend_class_entry *point_ce;
+
 PHP_METHOD(Point, __construct)
 {
     double x = 0.0;

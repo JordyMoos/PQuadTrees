@@ -1,4 +1,4 @@
 
 #pragma once
 
-zend_class_entry *point_ce;
+extern zend_class_entry *point_ce;

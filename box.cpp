@@ -77,6 +77,15 @@ PHP_METHOD(Box, getWidth)
     RETURN_DOUBLE(box->getWidth());
 }
 
+PHP_METHOD(Box, getCenterPoint)
+{
+    box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTreeBoundingBox *box = obj->box;
+    QuadTreePoint *point = box->getCenterPoint();
+
+
+}
+
 zend_function_entry box_methods[] = {
     PHP_ME(Box, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
     PHP_ME(Box, getWidth, NULL, ZEND_ACC_PUBLIC)

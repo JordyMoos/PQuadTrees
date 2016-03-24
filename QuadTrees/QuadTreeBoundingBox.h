@@ -6,16 +6,16 @@
 class QuadTreeBoundingBox
 {
 private:
-    QuadTreePoint point;
+    QuadTreePoint centerPoint;
     float width;
     float height;
 
 public:
-    QuadTreeBoundingBox(QuadTreePoint point, float width, float height);
+    QuadTreeBoundingBox(QuadTreePoint centerPoint, float width, float height);
 
     const QuadTreePoint &getCenterPoint() const
     {
-        return point;
+        return centerPoint;
     }
 
     const float getWidth() const

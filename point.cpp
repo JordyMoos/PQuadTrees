@@ -1,18 +1,14 @@
 
 #include "main.h"
 #include "point.h"
-#include "QuadTrees/QuadTreePoint.h"
 
 zend_object_handlers point_object_handlers;
-
-struct point_object {
-    zend_object std;
-    QuadTreePoint *point;
-};
 
 void point_free_storage(void *object TSRMLS_DC)
 {
     point_object *obj = static_cast<point_object*>(object);
+
+    assert(obj->point != NULL);
     delete obj->point;
 
     zend_hash_destroy(obj->std.properties);

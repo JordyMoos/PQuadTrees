@@ -1,7 +1,8 @@
 
 #include "main.h"
-#include "QuadTrees/QuadTreeBoundingBox.h"
 #include "point.h"
+#include "QuadTrees/QuadTreeBoundingBox.h"
+#include "QuadTrees/QuadTreePoint.h"
 
 zend_object_handlers box_object_handlers;
 
@@ -13,6 +14,8 @@ struct box_object {
 void box_free_storage(void *object TSRMLS_DC)
 {
     box_object *obj = static_cast<box_object*>(object);
+
+    assert(obj->box != NULL);
     delete obj->box;
 
     zend_hash_destroy(obj->std.properties);
@@ -43,26 +46,40 @@ zend_class_entry *box_ce;
 
 PHP_METHOD(Box, __construct)
 {
-    zval *point;
+    zval *zpoint;
     double width = 1.0;
     double height = 1.0;
-    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O|dd", &point, point_ce, &width, &height) == FAILURE)
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O|dd", &zpoint, point_ce, &width, &height) == FAILURE)
     {
-        php_printf("Failed\n");
         RETURN_NULL();
     }
 
-    php_printf("Good\n");
-    php_printf("Width: %f\n", width);
-    php_printf("Height: %f\n", height);
+    point_object *point = static_cast<point_object*>(zend_object_store_get_object(zpoint));
+    if (point->point == NULL) {
+        php_printf("Point is null\n");
+    }
 
-    PRINT_ZVAL(point);
+    QuadTreeBoundingBox *box = new QuadTreeBoundingBox(
+        *point->point,
+        static_cast<float>(width),
+        static_cast<float>(height)
+    );
 
-    RETURN_NULL();
+    box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    obj->box = box;
+}
+
+PHP_METHOD(Box, getWidth)
+{
+    box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTreeBoundingBox *box = obj->box;
+
+    RETURN_DOUBLE(box->getWidth());
 }
 
 zend_function_entry box_methods[] = {
     PHP_ME(Box, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
+    PHP_ME(Box, getWidth, NULL, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 

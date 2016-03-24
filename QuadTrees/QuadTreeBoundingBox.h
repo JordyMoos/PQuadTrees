@@ -6,14 +6,14 @@
 class QuadTreeBoundingBox
 {
 private:
-    QuadTreePoint *point;
+    QuadTreePoint point;
     float width;
     float height;
 
 public:
-    QuadTreeBoundingBox(QuadTreePoint *point, float width, float height);
+    QuadTreeBoundingBox(QuadTreePoint point, float width, float height);
 
-    QuadTreePoint* getCenterPoint() const
+    const QuadTreePoint &getCenterPoint() const
     {
         return point;
     }
@@ -37,22 +37,22 @@ public:
 private:
     float startX() const
     {
-        return point->getX() - width / 2;
+        return point.getX() - width / 2;
     }
 
     float endX() const
     {
-        return point->getX() + width / 2;
+        return point.getX() + width / 2;
     }
 
     float startY() const
     {
-        return point->getY() - height / 2;
+        return point.getY() - height / 2;
     }
 
     float endY() const
     {
-        return point->getY() + height / 2;
+        return point.getY() + height / 2;
     }
 
     bool isXinRange(float x) const;

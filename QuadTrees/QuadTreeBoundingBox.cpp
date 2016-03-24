@@ -1,7 +1,7 @@
 
 #include "QuadTreeBoundingBox.h"
 
-QuadTreeBoundingBox::QuadTreeBoundingBox(QuadTreePoint *point, float width, float height)
+QuadTreeBoundingBox::QuadTreeBoundingBox(QuadTreePoint point, float width, float height)
     : point(point), width(width), height(height)
 {
 }

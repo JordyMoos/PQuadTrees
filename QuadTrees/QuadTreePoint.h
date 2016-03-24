@@ -13,12 +13,12 @@ public:
     {
     }
 
-    float getX()
+    float getX() const
     {
         return x;
     }
 
-    float getY()
+    float getY() const
     {
         return y;
     }

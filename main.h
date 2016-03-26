@@ -19,3 +19,4 @@ extern zend_module_entry pquadtrees_module_entry;
 
 void init_point(INIT_FUNC_ARGS);
 void init_box(INIT_FUNC_ARGS);
+void init_quadtree(INIT_FUNC_ARGS);

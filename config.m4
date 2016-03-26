@@ -11,6 +11,7 @@ if test $PHP_PQUADTREES != "no"; then
         main.cpp \
         point.cpp \
         box.cpp \
+        quadtree.cpp \
         QuadTrees/QuadTreeBoundingBox.cpp\
         QuadTrees/QuadTree.cpp\
         , $ext_shared)

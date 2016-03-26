@@ -1,15 +1,11 @@
 
 #include "main.h"
+#include "box.h"
 #include "point.h"
 #include "QuadTrees/QuadTreeBoundingBox.h"
 #include "QuadTrees/QuadTreePoint.h"
 
 zend_object_handlers box_object_handlers;
-
-struct box_object {
-    zend_object std;
-    QuadTreeBoundingBox *box;
-};
 
 void box_free_storage(void *object TSRMLS_DC)
 {
@@ -55,8 +51,10 @@ PHP_METHOD(Box, __construct)
     }
 
     point_object *point = static_cast<point_object*>(zend_object_store_get_object(zpoint));
-    if (point->point == NULL) {
+    if (point->point == NULL)
+    {
         php_printf("Point is null\n");
+        RETURN_NULL();
     }
 
     QuadTreeBoundingBox *box = new QuadTreeBoundingBox(

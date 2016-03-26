@@ -77,6 +77,14 @@ PHP_METHOD(Box, getWidth)
     RETURN_DOUBLE(box->getWidth());
 }
 
+PHP_METHOD(Box, getHeight)
+{
+    box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTreeBoundingBox *box = obj->box;
+
+    RETURN_DOUBLE(box->getHeight());
+}
+
 PHP_METHOD(Box, getCenterPoint)
 {
     box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
@@ -90,10 +98,34 @@ PHP_METHOD(Box, getCenterPoint)
     po->point = box->getCenterPoint();
 }
 
+PHP_METHOD(Box, containsPoint)
+{
+    zval *zpoint;
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &zpoint, point_ce) == FAILURE)
+    {
+        php_printf("\n\nArgument is not a point\n\n");
+        RETURN_NULL();
+    }
+
+    point_object *point = static_cast<point_object*>(zend_object_store_get_object(zpoint));
+    if (point->point == NULL) {
+        php_printf("Point is null\n");
+        RETURN_NULL();
+    }
+
+    box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTreeBoundingBox *box = obj->box;
+
+    bool contains = obj->box->containsPoint(*point->point);
+    RETURN_BOOL(contains);
+}
+
 zend_function_entry box_methods[] = {
     PHP_ME(Box, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
     PHP_ME(Box, getWidth, NULL, ZEND_ACC_PUBLIC)
+    PHP_ME(Box, getHeight, NULL, ZEND_ACC_PUBLIC)
     PHP_ME(Box, getCenterPoint, NULL, ZEND_ACC_PUBLIC)
+    PHP_ME(Box, containsPoint, NULL, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 

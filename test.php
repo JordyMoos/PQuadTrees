@@ -4,18 +4,19 @@ ini_set('display_errors', true);
 error_reporting(E_ALL);
 
 echo 'Default parameters: ' . PHP_EOL;
-$point = new QuadTreePoint();
+$defaultPoint = new QuadTreePoint();
+echo $defaultPoint->getX() . PHP_EOL;
+echo $defaultPoint->getY() . PHP_EOL;
+
+echo PHP_EOL;
+
+$point = new QuadTreePoint(100.0, 200.0);
 echo $point->getX() . PHP_EOL;
 echo $point->getY() . PHP_EOL;
 
 echo PHP_EOL;
-
-$point = new QuadTreePoint(1.0, 2.0);
-echo $point->getX() . PHP_EOL;
-echo $point->getY() . PHP_EOL;
-
 echo PHP_EOL;
-echo PHP_EOL;
+
 echo 'Create box with point:' .PHP_EOL;
 var_dump($point);
 
@@ -29,4 +30,11 @@ echo 'Width: ' . $box->getWidth() . PHP_EOL;
 $retrievedPoint = $box->getCenterPoint();
 echo 'Retrieved point: ' . PHP_EOL;
 var_dump($retrievedPoint);
+echo 'X: ' . $retrievedPoint->getX() . PHP_EOL;
+
+echo PHP_EOL;
+echo PHP_EOL;
+
+var_dump($box->containsPoint($defaultPoint));
+var_dump($box->containsPoint($point));
 

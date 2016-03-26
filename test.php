@@ -38,3 +38,20 @@ echo PHP_EOL;
 var_dump($box->containsPoint($defaultPoint));
 var_dump($box->containsPoint($point));
 
+echo PHP_EOL;
+echo PHP_EOL;
+
+$box2 = new QuadTreeBoundingBox($point, 5, 5);
+var_dump($box2->intersects($box));
+
+echo PHP_EOL;
+echo PHP_EOL;
+
+$box3 = new QuadTreeBoundingBox($defaultPoint, 5, 5);
+var_dump($box3->intersects($box));
+
+echo PHP_EOL;
+echo PHP_EOL;
+
+
+

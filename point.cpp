@@ -52,6 +52,9 @@ PHP_METHOD(Point, __construct)
     );
     point_object *obj = static_cast<point_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
     obj->point = point;
+
+    add_property_double_ex(getThis(), "x", sizeof("x"), x);
+    add_property_double_ex(getThis(), "y", sizeof("y"), y);
 }
 
 PHP_METHOD(Point, getX)
@@ -82,6 +85,7 @@ void init_point(INIT_FUNC_ARGS)
     zend_class_entry ce;
     INIT_CLASS_ENTRY(ce, "QuadTreePoint", point_methods);
     point_ce = zend_register_internal_class(&ce TSRMLS_CC);
+
     point_ce->create_object = point_create_handler;
     memcpy(&point_object_handlers, zend_get_std_object_handlers(), sizeof(zend_object_handlers));
     point_object_handlers.clone_obj = NULL;

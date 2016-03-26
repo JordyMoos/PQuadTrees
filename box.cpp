@@ -60,7 +60,7 @@ PHP_METHOD(Box, __construct)
     }
 
     QuadTreeBoundingBox *box = new QuadTreeBoundingBox(
-        *point->point,
+        point,
         static_cast<float>(width),
         static_cast<float>(height)
     );
@@ -81,13 +81,19 @@ PHP_METHOD(Box, getCenterPoint)
 {
     box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
     QuadTreeBoundingBox *box = obj->box;
-//    QuadTreePoint *point = box->getCenterPoint();
 
+    if (object_init_ex(return_value, point_ce) != SUCCESS) {
+        RETURN_NULL();
+    }
+
+    point_object *po = static_cast<point_object*>(zend_object_store_get_object(return_value TSRMLS_CC));
+    po->point = box->getCenterPoint();
 }
 
 zend_function_entry box_methods[] = {
     PHP_ME(Box, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
     PHP_ME(Box, getWidth, NULL, ZEND_ACC_PUBLIC)
+    PHP_ME(Box, getCenterPoint, NULL, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 

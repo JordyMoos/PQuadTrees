@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include "php.h"
 #include "QuadTrees/QuadTreePoint.h"
 
 extern zend_class_entry *point_ce;

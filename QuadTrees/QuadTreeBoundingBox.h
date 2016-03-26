@@ -2,18 +2,21 @@
 #pragma once
 
 #include "QuadTreePoint.h"
+#include "../point.h"
 
 class QuadTreeBoundingBox
 {
 private:
-    QuadTreePoint centerPoint;
+    point_object *pointObject;
+
+    QuadTreePoint *centerPoint;
     float width;
     float height;
 
 public:
-    QuadTreeBoundingBox(QuadTreePoint centerPoint, float width, float height);
+    QuadTreeBoundingBox(point_object *pointObject, float width, float height);
 
-    const QuadTreePoint &getCenterPoint() const
+    QuadTreePoint* getCenterPoint() const
     {
         return centerPoint;
     }
@@ -37,22 +40,22 @@ public:
 private:
     float startX() const
     {
-        return centerPoint.getX() - width / 2;
+        return centerPoint->getX() - width / 2;
     }
 
     float endX() const
     {
-        return centerPoint.getX() + width / 2;
+        return centerPoint->getX() + width / 2;
     }
 
     float startY() const
     {
-        return centerPoint.getY() - height / 2;
+        return centerPoint->getY() - height / 2;
     }
 
     float endY() const
     {
-        return centerPoint.getY() + height / 2;
+        return centerPoint->getY() + height / 2;
     }
 
     bool isXinRange(float x) const;

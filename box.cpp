@@ -81,8 +81,7 @@ PHP_METHOD(Box, getCenterPoint)
 {
     box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
     QuadTreeBoundingBox *box = obj->box;
-    QuadTreePoint *point = box->getCenterPoint();
-
+//    QuadTreePoint *point = box->getCenterPoint();
 
 }
 

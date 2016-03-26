@@ -37,22 +37,22 @@ public:
 private:
     float startX() const
     {
-        return point.getX() - width / 2;
+        return centerPoint.getX() - width / 2;
     }
 
     float endX() const
     {
-        return point.getX() + width / 2;
+        return centerPoint.getX() + width / 2;
     }
 
     float startY() const
     {
-        return point.getY() - height / 2;
+        return centerPoint.getY() - height / 2;
     }
 
     float endY() const
     {
-        return point.getY() + height / 2;
+        return centerPoint.getY() + height / 2;
     }
 
     bool isXinRange(float x) const;

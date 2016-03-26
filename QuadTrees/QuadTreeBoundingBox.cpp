@@ -2,7 +2,7 @@
 #include "QuadTreeBoundingBox.h"
 
 QuadTreeBoundingBox::QuadTreeBoundingBox(QuadTreePoint centerPoint, float width, float height)
-    : point(centerPoint), width(width), height(height)
+    : centerPoint(centerPoint), width(width), height(height)
 {
 }
 

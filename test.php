@@ -42,16 +42,18 @@ echo PHP_EOL;
 echo PHP_EOL;
 
 $box2 = new QuadTreeBoundingBox($point, 5, 5);
-var_dump($box2->intersects($box));
-
-echo PHP_EOL;
-echo PHP_EOL;
-
 $box3 = new QuadTreeBoundingBox($defaultPoint, 5, 5);
-var_dump($box3->intersects($box));
+
+var_dump($box->intersects($box));
+var_dump($box->intersects($box2));
+var_dump($box->intersects($box3));
 
 echo PHP_EOL;
 echo PHP_EOL;
+
+var_dump($box->encompasses($box));
+var_dump($box->encompasses($box2));
+var_dump($box->encompasses($box3));
 
 
 

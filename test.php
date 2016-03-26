@@ -55,5 +55,19 @@ var_dump($box->encompasses($box));
 var_dump($box->encompasses($box2));
 var_dump($box->encompasses($box3));
 
+echo PHP_EOL;
+echo PHP_EOL;
+
+$tree = new QuadTree($box);
+
+$point1 = new QuadTreePoint(101, 201);
+$point2 = new QuadTreePoint(102, 202);
+$point3 = new QuadTreePoint(103, 203);
+$point4 = new QuadTreePoint(104, 204);
+$point5 = new QuadTreePoint(105, 205);
+
+var_dump($tree->insert($point1));
+var_dump($tree->insert($point2));
+var_dump($tree->insert($point3));
 
 

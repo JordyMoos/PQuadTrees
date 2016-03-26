@@ -14,10 +14,10 @@ private:
     int maxPoints;
     std::list<QuadTreePoint*> pointList;
 
-    QuadTreeBoundingBox *northWest = NULL;
-    QuadTreeBoundingBox *northEast = NULL;
-    QuadTreeBoundingBox *southWest = NULL;
-    QuadTreeBoundingBox *southEast = NULL;
+    QuadTree *northWest = NULL;
+    QuadTree *northEast = NULL;
+    QuadTree *southWest = NULL;
+    QuadTree *southEast = NULL;
 
 public:
 

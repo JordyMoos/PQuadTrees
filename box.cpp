@@ -60,7 +60,7 @@ PHP_METHOD(Box, __construct)
     }
 
     QuadTreeBoundingBox *box = new QuadTreeBoundingBox(
-        point,
+        point->point,
         static_cast<float>(width),
         static_cast<float>(height)
     );

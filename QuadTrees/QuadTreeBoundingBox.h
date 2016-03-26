@@ -7,14 +7,12 @@
 class QuadTreeBoundingBox
 {
 private:
-    point_object *pointObject;
-
     QuadTreePoint *centerPoint;
     float width;
     float height;
 
 public:
-    QuadTreeBoundingBox(point_object *pointObject, float width, float height);
+    QuadTreeBoundingBox(QuadTreePoint *centerPoint, float width, float height);
 
     QuadTreePoint* getCenterPoint() const
     {

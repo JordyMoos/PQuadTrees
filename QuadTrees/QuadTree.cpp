@@ -2,7 +2,9 @@
 #include "QuadTree.h"
 
 QuadTree::QuadTree(QuadTreeBoundingBox *boundingBox, int maxPoints)
-    : boundingBox(boundingBox), maxPoints(maxPoints)
+    : boundingBox(boundingBox), maxPoints(maxPoints),
+      northWest(NULL), northEast(NULL),
+      southWest(NULL), southEast(NULL)
 {
 }
 
@@ -92,5 +94,11 @@ bool QuadTree::search(QuadTreeBoundingBox *boundary)
 
 }
 
-// @todo Add destructor to clean op the 4 created trees
+QuadTree::~QuadTree()
+{
+    if (northWest != NULL) delete northWest;
+    if (northEast != NULL) delete northEast;
+    if (southWest != NULL) delete southWest;
+    if (southEast != NULL) delete southEast;
+}
 

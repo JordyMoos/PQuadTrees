@@ -14,16 +14,17 @@ private:
     int maxPoints;
     std::list<QuadTreePoint*> pointList;
 
-    QuadTree *northWest = NULL;
-    QuadTree *northEast = NULL;
-    QuadTree *southWest = NULL;
-    QuadTree *southEast = NULL;
+    QuadTree *northWest;
+    QuadTree *northEast;
+    QuadTree *southWest;
+    QuadTree *southEast;
 
 public:
 
     QuadTree(QuadTreeBoundingBox *boundingBox, int maxPoints = DEFAULT_CAPACITY);
     bool insert(QuadTreePoint *point);
     bool search(QuadTreeBoundingBox *boundary);
+    ~QuadTree();
 
 private:
     void subdivide();

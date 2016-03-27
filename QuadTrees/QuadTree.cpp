@@ -89,10 +89,30 @@ void QuadTree::subdivide()
     );
 }
 
-bool QuadTree::search(QuadTreeBoundingBox *boundary)
-{
 
+std::list<QuadTreePoint*> *QuadTree::search(QuadTreeBoundingBox *boundary)
+{
+    std::list<QuadTreePoint*> *resultList = new std::list<QuadTreePoint*>;
+
+    return QuadTree::search(boundary, resultList);
 }
+
+std::list<QuadTreePoint*> *QuadTree::search(QuadTreeBoundingBox *boundary, std::list<QuadTreePoint*> *resultList)
+{
+    if (boundingBox->encompasses(*boundary) || boundingBox->intersects(*boundary))
+    {
+        for(std::list<QuadTreePoint*>::iterator iterator = pointList.begin(); iterator != pointList.end(); iterator++)
+        {
+            if (boundary->containsPoint(*(*iterator)))
+            {
+                resultList->push_back(*iterator);
+            }
+        }
+    }
+
+    return resultList;
+}
+
 
 QuadTree::~QuadTree()
 {

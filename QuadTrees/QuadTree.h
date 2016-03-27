@@ -23,7 +23,8 @@ public:
 
     QuadTree(QuadTreeBoundingBox *boundingBox, int maxPoints = DEFAULT_CAPACITY);
     bool insert(QuadTreePoint *point);
-    bool search(QuadTreeBoundingBox *boundary);
+    std::list<QuadTreePoint*> *search(QuadTreeBoundingBox *boundary, std::list<QuadTreePoint*> *resultList);
+    std::list<QuadTreePoint*> *search(QuadTreeBoundingBox *boundary);
     ~QuadTree();
 
 private:

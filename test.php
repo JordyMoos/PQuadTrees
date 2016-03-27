@@ -72,4 +72,15 @@ var_dump($tree->insert($point3));
 var_dump($tree->insert($point4));
 var_dump($tree->insert($point5));
 
+echo PHP_EOL;
+echo PHP_EOL;
+
+$resultList = $tree->search($box);
+var_dump($resultList);
+
+echo PHP_EOL;
+echo PHP_EOL;
+
+$resultList = $tree->search(new QuadTreeBoundingBox($point, 1, 1));
+var_dump($resultList);
 

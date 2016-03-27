@@ -94,9 +94,35 @@ PHP_METHOD(QuadTree, insert)
     RETURN_BOOL(isSuccess);
 }
 
+PHP_METHOD(QuadTree, search)
+{
+    zval *zboundary;
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &zboundary, box_ce) == FAILURE)
+    {
+        php_printf("\n\nArgument is not a box\n\n");
+        RETURN_NULL();
+    }
+
+    box_object *boundary = static_cast<box_object*>(zend_object_store_get_object(zboundary));
+    if (boundary->box == NULL)
+    {
+        php_printf("Boundary is null\n");
+        RETURN_NULL();
+    }
+
+    quadtree_object *obj = static_cast<quadtree_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTree *quadTree = obj->quadTree;
+
+    std::list<QuadTreePoint*> *pointList = quadTree->search(boundary->box);
+    php_printf("%d points found for your box\n", pointList->size());
+
+    RETURN_NULL();
+}
+
 zend_function_entry quadtree_methods[] = {
     PHP_ME(QuadTree, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
     PHP_ME(QuadTree, insert, NULL, ZEND_ACC_PUBLIC)
+    PHP_ME(QuadTree, search, NULL, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 

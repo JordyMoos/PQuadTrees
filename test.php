@@ -66,8 +66,10 @@ $point3 = new QuadTreePoint(103, 203);
 $point4 = new QuadTreePoint(104, 204);
 $point5 = new QuadTreePoint(105, 205);
 
-//var_dump($tree->insert($point1));
-//var_dump($tree->insert($point2));
-//var_dump($tree->insert($point3));
+var_dump($tree->insert($point1));
+var_dump($tree->insert($point2));
+var_dump($tree->insert($point3));
+var_dump($tree->insert($point4));
+var_dump($tree->insert($point5));
 
 

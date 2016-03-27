@@ -71,8 +71,32 @@ PHP_METHOD(QuadTree, __construct)
     obj->quadTree = quadTree;
 }
 
+PHP_METHOD(QuadTree, insert)
+{
+    zval *zpoint;
+    if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &zpoint, point_ce) == FAILURE)
+    {
+        php_printf("\n\nArgument is not a point\n\n");
+        RETURN_NULL();
+    }
+
+    point_object *point = static_cast<point_object*>(zend_object_store_get_object(zpoint));
+    if (point->point == NULL)
+    {
+        php_printf("Point is null\n");
+        RETURN_NULL();
+    }
+
+    quadtree_object *obj = static_cast<quadtree_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTree *quadTree = obj->quadTree;
+
+    bool isSuccess = quadTree->insert(point->point);
+    RETURN_BOOL(isSuccess);
+}
+
 zend_function_entry quadtree_methods[] = {
     PHP_ME(QuadTree, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
+    PHP_ME(QuadTree, insert, NULL, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 

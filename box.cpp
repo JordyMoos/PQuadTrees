@@ -128,7 +128,8 @@ PHP_METHOD(Box, intersects)
     }
 
     box_object *otherBox = static_cast<box_object*>(zend_object_store_get_object(zotherBox));
-    if (otherBox->box == NULL) {
+    if (otherBox->box == NULL)
+    {
         php_printf("Box is null\n");
         RETURN_NULL();
     }

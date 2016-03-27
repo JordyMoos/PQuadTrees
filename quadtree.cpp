@@ -114,7 +114,17 @@ PHP_METHOD(QuadTree, search)
     QuadTree *quadTree = obj->quadTree;
 
     std::list<QuadTreePoint*> *pointList = quadTree->search(boundary->box);
-    php_printf("%d points found for your box\n", pointList->size());
+    php_printf("%d points found for your box\n", static_cast<int>(pointList->size()));
+
+    RETURN_NULL();
+}
+
+PHP_METHOD(QuadTree, dump)
+{
+    quadtree_object *obj = static_cast<quadtree_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTree *quadTree = obj->quadTree;
+
+    quadTree->dump();
 
     RETURN_NULL();
 }
@@ -123,6 +133,7 @@ zend_function_entry quadtree_methods[] = {
     PHP_ME(QuadTree, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
     PHP_ME(QuadTree, insert, NULL, ZEND_ACC_PUBLIC)
     PHP_ME(QuadTree, search, NULL, ZEND_ACC_PUBLIC)
+    PHP_ME(QuadTree, dump, NULL, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 

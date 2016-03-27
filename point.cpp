@@ -73,10 +73,21 @@ PHP_METHOD(Point, getY)
     RETURN_DOUBLE(point->getY());
 }
 
+PHP_METHOD(Point, dump)
+{
+    point_object *obj = static_cast<point_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTreePoint *point = obj->point;
+
+    point->dump();
+
+    RETURN_NULL();
+}
+
 zend_function_entry point_methods[] = {
     PHP_ME(Point, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
     PHP_ME(Point, getX, NULL, ZEND_ACC_PUBLIC)
     PHP_ME(Point, getY, NULL, ZEND_ACC_PUBLIC)
+    PHP_ME(Point, dump, NULL, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 

@@ -26,6 +26,7 @@ public:
     std::list<QuadTreePoint*> *search(QuadTreeBoundingBox *boundary, std::list<QuadTreePoint*> *resultList);
     std::list<QuadTreePoint*> *search(QuadTreeBoundingBox *boundary);
     ~QuadTree();
+    void dump(int depth = 1);
 
 private:
     void subdivide();

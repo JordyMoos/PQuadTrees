@@ -4,6 +4,7 @@
 QuadTreeBoundingBox::QuadTreeBoundingBox(QuadTreePoint *centerPoint, float width, float height)
     : centerPoint(centerPoint), width(width), height(height)
 {
+    php_printf("Creating box with size: %f and %f\n", width, height);
 }
 
 bool QuadTreeBoundingBox::containsPoint(const QuadTreePoint &point) const

@@ -163,6 +163,16 @@ PHP_METHOD(Box, encompasses)
     RETURN_BOOL(encompasses);
 }
 
+PHP_METHOD(Box, dump)
+{
+    box_object *obj = static_cast<box_object*>(zend_object_store_get_object(getThis() TSRMLS_CC));
+    QuadTreeBoundingBox *box = obj->box;
+
+    box->dump();
+
+    RETURN_NULL();
+}
+
 zend_function_entry box_methods[] = {
     PHP_ME(Box, __construct, NULL, ZEND_ACC_PUBLIC | ZEND_ACC_CTOR)
     PHP_ME(Box, getWidth, NULL, ZEND_ACC_PUBLIC)
@@ -171,6 +181,7 @@ zend_function_entry box_methods[] = {
     PHP_ME(Box, containsPoint, NULL, ZEND_ACC_PUBLIC)
     PHP_ME(Box, intersects, NULL, ZEND_ACC_PUBLIC)
     PHP_ME(Box, encompasses, NULL, ZEND_ACC_PUBLIC)
+    PHP_ME(Box, dump, NULL, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 

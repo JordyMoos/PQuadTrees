@@ -35,6 +35,13 @@ public:
 
     bool encompasses(const QuadTreeBoundingBox &box) const;
 
+    void dump()
+    {
+        php_printf("Box information [X: %f] [Y: %f] [W: %f] [H: %f]\n",
+                   centerPoint->getX(), centerPoint->getY(),
+                    width, height);
+    }
+
 private:
     float startX() const
     {

@@ -4,10 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', true);
 
 $pointA = new QuadTreePoint(100, 100);
-$box = new QuadTreeBoundingBox($pointA, 110, 120);
+$box = new QuadTreeBoundingBox($pointA, 200, 200);
 
 $pointB = new QuadTreePoint(100, 100);
-$otherBox = new QuadTreeBoundingBox($pointB, 210, 220);
+$otherBox = new QuadTreeBoundingBox($pointB, 100, 100);
 
 $point1 = new QuadTreePoint(10, 10);
 $point2 = new QuadTreePoint(20, 20);
@@ -27,15 +27,15 @@ $tree->dump();
 echo PHP_EOL;
 
 $tree->insert($point1);
-//$tree->insert($point2);
-//$tree->insert($point3);
-//$tree->insert($point4);
-//$tree->insert($point5);
-//$tree->insert($point6);
-//$tree->insert($point7);
-//$tree->insert($point8);
-//$tree->insert($point9);
-//$tree->insert($point10);
+$tree->insert($point2);
+$tree->insert($point3);
+$tree->insert($point4);
+$tree->insert($point5);
+$tree->insert($point6);
+$tree->insert($point7);
+$tree->insert($point8);
+$tree->insert($point9);
+$tree->insert($point10);
 
 $tree->dump();
 
@@ -43,4 +43,8 @@ echo PHP_EOL;
 echo PHP_EOL;
 echo PHP_EOL;
 
-//var_dump($tree->search($otherBox));
+var_dump($point1);
+
+echo PHP_EOL;
+
+var_dump($tree->search($otherBox));

@@ -8,8 +8,8 @@ void point_free_storage(void *object TSRMLS_DC)
 {
     point_object *obj = static_cast<point_object*>(object);
 
-    assert(obj->point != NULL);
-    delete obj->point;
+    if (obj->point != NULL)
+        delete obj->point;
 
     zend_hash_destroy(obj->std.properties);
     FREE_HASHTABLE(obj->std.properties);

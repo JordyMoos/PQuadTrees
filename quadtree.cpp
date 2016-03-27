@@ -15,8 +15,8 @@ void quadtree_free_storage(void *object TSRMLS_DC)
 {
     quadtree_object *obj = static_cast<quadtree_object*>(object);
 
-    assert(obj->quadTree != NULL);
-    delete obj->quadTree;
+    if (obj->quadTree != NULL)
+        delete obj->quadTree;
 
     zend_hash_destroy(obj->std.properties);
     FREE_HASHTABLE(obj->std.properties);
@@ -116,7 +116,17 @@ PHP_METHOD(QuadTree, search)
     std::list<QuadTreePoint*> *pointList = quadTree->search(boundary->box);
     php_printf("%d points found for your box\n", static_cast<int>(pointList->size()));
 
-    RETURN_NULL();
+    array_init(return_value);
+
+    for (std::list<QuadTreePoint*>::iterator iter = pointList->begin(); iter != pointList->end(); iter++)
+    {
+        zval *row;
+        MAKE_STD_ZVAL(row);
+        object_init_ex(row, point_ce);
+        zend_update_property_double(point_ce, row, "x", sizeof("x"), (*iter)->getX() TSRMLS_CC);
+        zend_update_property_double(point_ce, row, "y", sizeof("y"), (*iter)->getY() TSRMLS_CC);
+        add_next_index_zval(return_value, row);
+    }
 }
 
 PHP_METHOD(QuadTree, dump)

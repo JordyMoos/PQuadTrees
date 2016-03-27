@@ -13,6 +13,7 @@ bool QuadTree::insert(QuadTreePoint *point)
 {
     if ( ! boundingBox->containsPoint(*point))
     {
+        point->dump();
         php_printf("[insert] not contains false\n");
         return false;
     }
@@ -104,9 +105,6 @@ std::list<QuadTreePoint*> *QuadTree::search(QuadTreeBoundingBox *boundary)
 
 std::list<QuadTreePoint*> *QuadTree::search(QuadTreeBoundingBox *boundary, std::list<QuadTreePoint*> *resultList)
 {
-    php_printf("[Box info] %f : %f\n", boundingBox->getCenterPoint()->getX(), boundingBox->getCenterPoint()->getY());
-    php_printf("[Search] Points found: %d\n", static_cast<int>(pointList.size()));
-
     if (boundingBox->encompasses(*boundary) || boundingBox->intersects(*boundary))
     {
         for(std::list<QuadTreePoint*>::iterator iterator = pointList.begin(); iterator != pointList.end(); iterator++)
@@ -115,21 +113,14 @@ std::list<QuadTreePoint*> *QuadTree::search(QuadTreeBoundingBox *boundary, std::
             {
                 resultList->push_back(*iterator);
             }
+        }
 
-            if (northWest != NULL)
-            {
-                php_printf("\n[NorthWest]\n");
-                northWest->search(boundary, resultList);
-
-                php_printf("\n[NorthEast]\n");
-                northEast->search(boundary, resultList);
-
-                php_printf("\n[SouthWest]\n");
-                southWest->search(boundary, resultList);
-
-                php_printf("\n[SouthEast]\n");
-                southEast->search(boundary, resultList);
-            }
+        if (northWest != NULL)
+        {
+            northWest->search(boundary, resultList);
+            northEast->search(boundary, resultList);
+            southWest->search(boundary, resultList);
+            southEast->search(boundary, resultList);
         }
     }
 

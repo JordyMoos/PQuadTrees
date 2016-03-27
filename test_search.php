@@ -47,4 +47,14 @@ var_dump($point1);
 
 echo PHP_EOL;
 
-var_dump($tree->search($otherBox));
+$resultList = $tree->search($otherBox);
+var_dump($resultList);
+
+foreach ($resultList as $point) {
+    var_dump([
+        'x' => $point->getX(),
+        'y' => $point->getY(),
+    ]);
+}
+
+

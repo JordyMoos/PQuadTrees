@@ -123,8 +123,9 @@ PHP_METHOD(QuadTree, search)
         zval *row;
         MAKE_STD_ZVAL(row);
         object_init_ex(row, point_ce);
-        zend_update_property_double(point_ce, row, "x", sizeof("x"), (*iter)->getX() TSRMLS_CC);
-        zend_update_property_double(point_ce, row, "y", sizeof("y"), (*iter)->getY() TSRMLS_CC);
+
+        point_object *po = static_cast<point_object*>(zend_object_store_get_object(row TSRMLS_CC));
+        po->point = *iter;
         add_next_index_zval(return_value, row);
     }
 }
